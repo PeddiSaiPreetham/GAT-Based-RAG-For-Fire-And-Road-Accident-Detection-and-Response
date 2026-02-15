@@ -1,0 +1,48 @@
+camera:
+  source: 0
+  sample_rate: 1.0
+  evidence_dir: evidence_clips
+
+models:
+  detector: yolov8n
+  text_emb: all-mpnet-base-v2
+  class_map: {"0":"person","1":"fire","2":"smoke","3":"vehicle"}
+
+retrieval:
+  faiss_index_path: data/faiss_index.bin
+  docs_path: demo_data/guidelines
+  index_exists: false
+
+gnn:
+  in_channels: 5
+  gat_hidden: 256
+  heads: 4
+  weights_path: "hybrid_gnn_checkpoint.pt"
+
+decision:
+  level2_threshold: 0.75
+  level1_threshold: 0.6
+  gnn_threshold: 0.6
+  cooldown_seconds: 120
+
+
+alerts:
+  notify_numbers: []
+  notify_emails:
+    - "email1@gmail.com"
+    - "email2@mnit.ac.in"
+    
+  email:
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    smtp_user: "your_email"
+    smtp_pass: "CONFIDENTIAL"
+    from: "your_email"
+
+llm:
+  provider: gemini
+  gemini_api_key: "API_KEY"
+  openai_api_key: "OPENAI_API"
+  model: "gemini-2.5-pro"
+  tts_model: "models/gemini-2.5-pro-preview-tts"
+camera_id: local_cam
